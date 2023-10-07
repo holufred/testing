@@ -1,0 +1,25 @@
+ \subsection{Bilingual Evaluation Understudy (BLEU) Scores}
+The Bilingual Evaluation Understudy (BLEU) score is a metric that quantifies the congruence between machine-generated translation and human-created reference translations. The principal idea is to measure how many n-grams in the machine-generated translation match with the n-grams in the reference text(s). An n-gram is simply a contiguous sequence of n items (words, in this context) from a given text.\\
+
+Given a candidate translation and a reference translation, the BLEU score is computed as:
+\begin{equation}
+\text{BLEU} = \text{BP} \times \exp \left( \sum_{n=1}^{N} w_n \cdot \log(p_n) \right)
+\myequations{BLEU Score}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $p_n$ is the precision of the $n$-th order n-grams. It is computed as the ratio of the number of $n$-gram matches between the candidate and the reference to the total number of $n$-grams in the candidate.
+    \item $w_n$ denotes the weights for each $n$-gram precision. Typically, for uniform weights, $w_n = \frac{1}{N}$.
+    \item \text{BP} (Brevity Penalty) accounts for the translation's length and is given by:
+    \begin{equation}
+    \text{BP} = 
+    \begin{cases} 
+    1 & \text{if }  c \geq r \\
+    \exp \left( 1 - \frac{r}{c} \right) & \text{if }  c < r
+    \end{cases}
+    \myequations{Brevity Penalty}
+    \end{equation}
+    with $c$ representing the length of the candidate translation and $r$ being the reference's effective length.
+\end{itemize}
+The BLEU score ranges from 0 to 1, with 1 being the perfect 
